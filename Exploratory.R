@@ -147,8 +147,6 @@ tbl2$ndx<-seq.int(nrow(tbl2))
 
 tbl2$pctdoc<-tbl2$ndx/max(as.numeric(tbl2$ndx))
 
-View(tbl2)
-
 # Create dfm of tri-grams
 
 Mydfm3 <- dfm(TxtCorp, tolower = T, stem = F, remove_punct = T, verbose=F,
@@ -157,8 +155,6 @@ Mydfm3 <- dfm(TxtCorp, tolower = T, stem = F, remove_punct = T, verbose=F,
 # Display top features evaluate frequencies of tri-grams
 
 TF3<-topfeatures(Mydfm3, n=50)
-
-TF3
 
 tbl3<-textstat_frequency(Mydfm3)
 
@@ -169,8 +165,6 @@ tbl3$pcttoken<-tbl3$cumfreq/sum(tbl3$frequency)
 tbl3$ndx<-seq.int(nrow(tbl3))
 
 tbl3$pctdoc<-tbl3$ndx/max(as.numeric(tbl3$ndx))
-
-View(tbl3)
 
 # Remove the dfms to conserve memory
 
@@ -253,7 +247,7 @@ p1<-arrange(p1, desc(frequency))
 p2<-tbl2[1:20,]
 p2<-arrange(p2, desc(frequency))
 
-p3<-tbl2[1:20,]
+p3<-tbl3[1:20,]
 p3<-arrange(p3, desc(frequency))
 
 pl1<-ggplot(aes(x=feature, y=frequency),data=p1)+geom_bar(fill="blue", stat="identity")+
@@ -264,7 +258,7 @@ pl1<-ggplot(aes(x=feature, y=frequency),data=p1)+geom_bar(fill="blue", stat="ide
 pl1
 
 dev.copy(png, "Columns1.png")
-dev.off
+dev.off()
 
 pl2<-ggplot(aes(x=feature, y=frequency),data=p2)+geom_bar(fill="blue", stat="identity")+
   labs(x="Bigram", y="Frequency", title="Top 20 Bigrams")+
@@ -274,7 +268,7 @@ pl2<-ggplot(aes(x=feature, y=frequency),data=p2)+geom_bar(fill="blue", stat="ide
 pl2
 
 dev.copy(png, "Columns2.png")
-dev.off
+dev.off()
 
 pl3<-ggplot(aes(x=feature, y=frequency),data=p3)+geom_bar(fill="blue", stat="identity")+
   labs(x="Trigram", y="Frequency", title="Top 20 Trigrams")+
@@ -284,4 +278,4 @@ pl3<-ggplot(aes(x=feature, y=frequency),data=p3)+geom_bar(fill="blue", stat="ide
 pl3
 
 dev.copy(png, "Columns3.png")
-dev.off
+dev.off()
