@@ -1,5 +1,11 @@
 # Exploratory
 
+# some usefull functions
+
+sizeme<-function(x) {
+  print(object.size(x), units="auto")
+}
+
 # libraries
 
 library(quanteda)
@@ -174,17 +180,108 @@ gc(T)
 
 # Make some plots
 
-plot1<-ggplot(tbl1, aes(x=pctdoc, y=pcttoken))+geom_line(col="blue")+
-  labs(x="Percentage of Unique Unigrams", y="Percentage of Total Unigrams", title="Distribution of Unigrams")
+# define intercepts where we reach 50 and 90 percent of total n-grams
+
+y1a<-tbl1 %>%
+  filter(pcttoken>=.5)
+yint1a<-min(y1a$pctdoc)
+
+y1b<-tbl1 %>%
+  filter(pcttoken>=.9)
+yint1b<-min(y1b$pctdoc)
+
+y2a<-tbl2 %>%
+  filter(pcttoken>=.5)
+yint2a<-min(y2a$pctdoc)
+
+y2b<-tbl2 %>%
+  filter(pcttoken>=.9)
+yint2b<-min(y2b$pctdoc)
+
+y3a<-tbl3 %>%
+  filter(pcttoken>=.5)
+yint3a<-min(y3a$pctdoc)
+
+y3b<-tbl3 %>%
+  filter(pcttoken>=.9)
+yint3b<-min(y3b$pctdoc)
+
+rm(y1a, y1b, y2a, y2b, y3a, y3b)
+
+gc(T)
+
+# Plot n-gram frequencies vs. total n-grams
+
+plot1<-ggplot(tbl1, aes(x=pctdoc, y=pcttoken))+geom_line(col="blue", size=1.75)+
+  labs(x="Percentage of Unique Unigrams", y="Percentage of Total Unigrams", title="Distribution of Unigrams")+
+  geom_hline(yintercept=c(.5, .9), col="red")+geom_vline(xintercept=c(yint1a, yint1b), col="red")
 
 plot1
 
-plot2<-ggplot(tbl2, aes(x=pctdoc, y=pcttoken))+geom_line(col="blue")+
-  labs(x="Percentage of Unique Bigrams", y="Percentage of Total Bigrams", title="Distribution of Bigrams")
+dev.copy(png, "plot1.png")
+dev.off()
+
+plot2<-ggplot(tbl2, aes(x=pctdoc, y=pcttoken))+geom_line(col="blue", size=1.75)+
+  labs(x="Percentage of Unique Bigrams", y="Percentage of Total Bigrams", title="Distribution of Bigrams")+
+  geom_hline(yintercept=c(.5, .9), col="red")+geom_vline(xintercept=c(yint2a, yint2b), col="red")
 
 plot2
 
-plot3<-ggplot(tbl3, aes(x=pctdoc, y=pcttoken))+geom_line(col="blue")+
-  labs(x="Percentage of Unique Trigrams", y="Percentage of Total Trigrams", title="Distribution of Trigrams")
+dev.copy(png, "plot2.png")
+dev.off()
+
+plot3<-ggplot(tbl3, aes(x=pctdoc, y=pcttoken))+geom_line(col="blue", size=1.75)+
+  labs(x="Percentage of Unique Trigrams", y="Percentage of Total Trigrams", title="Distribution of Trigrams")+
+  geom_hline(yintercept=c(.5, .9), col="red")+geom_vline(xintercept=c(yint3a, yint3b), col="red")
 
 plot3
+
+dev.copy(png, "plot3.png")
+dev.off()
+
+rm(plot1, plot2, plot3)
+
+gc()
+
+# Plot the frequencies of the 20 most common n-grams
+
+# Create some tables to plot with
+
+p1<-tbl1[1:20,]
+p1<-arrange(p1, desc(frequency))
+
+p2<-tbl2[1:20,]
+p2<-arrange(p2, desc(frequency))
+
+p3<-tbl2[1:20,]
+p3<-arrange(p3, desc(frequency))
+
+pl1<-ggplot(aes(x=feature, y=frequency),data=p1)+geom_bar(fill="blue", stat="identity")+
+  labs(x="Unigram", y="Frequency", title="Top 20 Unigrams")+
+  theme(legend.position = "none", axis.text.x = element_text(angle = 60,hjust = 1))+
+  scale_x_discrete(limits=p1$feature)
+
+pl1
+
+dev.copy(png, "Columns1.png")
+dev.off
+
+pl2<-ggplot(aes(x=feature, y=frequency),data=p2)+geom_bar(fill="blue", stat="identity")+
+  labs(x="Bigram", y="Frequency", title="Top 20 Bigrams")+
+  theme(legend.position = "none", axis.text.x = element_text(angle = 60,hjust = 1))+
+  scale_x_discrete(limits=p2$feature)
+
+pl2
+
+dev.copy(png, "Columns2.png")
+dev.off
+
+pl3<-ggplot(aes(x=feature, y=frequency),data=p3)+geom_bar(fill="blue", stat="identity")+
+  labs(x="Trigram", y="Frequency", title="Top 20 Trigrams")+
+  theme(legend.position = "none", axis.text.x = element_text(angle = 60,hjust = 1))+
+  scale_x_discrete(limits=p3$feature)
+
+pl3
+
+dev.copy(png, "Columns3.png")
+dev.off
