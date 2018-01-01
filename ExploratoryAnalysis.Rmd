@@ -97,7 +97,7 @@ y3b<-tbl3 %>%
 yint3b<-min(y3b$pctdoc)
 ```
 
-To conserve system resources, used the quanteda corpus_sample() function to randomly sample 5% of the larger corpus.  With this sample I analyzed the frequency distribution of 1, 2, and 3 grams to get an idea of how many n-grams I would need to cover the majority of the language in the corpus.
+To conserve system resources, I used the quanteda corpus_sample() function to randomly sample 5% of the larger corpus.  With this sample I analyzed the frequency distribution of 1, 2, and 3 grams to get an idea of how many n-grams I would need to cover the majority of the language in the corpus.
 
 ### Unigrams
 
