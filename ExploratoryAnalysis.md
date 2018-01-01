@@ -50,6 +50,8 @@ I read all three of these files into a single data frame, then used the quanteda
 
 ## Frequency Analysis
 
+
+
 To conserve system resources, used the quanteda corpus_sample() function to randomly sample 5% of the larger corpus.  With this sample I analyzed the frequency distribution of 1, 2, and 3 grams to get an idea of how many n-grams I would need to cover the majority of the language in the corpus.
 
 ### Unigrams
@@ -57,4 +59,37 @@ To conserve system resources, used the quanteda corpus_sample() function to rand
 The plot below shows the top 20 unigrams:
 
 ![](Columns1.png)
+
+
+This next plot shows what percentage of unique unigrams I need to cover 50 and 90 percent of the total unigrams in the sample.  We can see that we only need 0.11% of the unique unigrams to cover 50$ of the language and only 6.1% to cover 90%.
+
+![](plot1.png)
+
+## Bi-grams
+
+The plot below shows the top 20 bigrams:
+
+![](Columns2.png)
+
+Now we will plot what percentage of unique bigrams I need to cover 50 and 90 percent of the total bigrams in the sample.  With bigrams we need 2.71% of the unique bigrams to cover 50% of the language and 70.95% to cover 90%.
+
+![](plot2.png)
+
+## Trigrams
+
+This plot shows the top 20 trigrams:
+
+![](Columns3.png)
+
+With trigrams, we see that there is a much higher percentage of low frequency occurances.  It takes 32.72% of the unique trigrams to cover 50% of the total and 86.54% of the uniques to cover 90%.  
+
+![](plot3.png)
+
+
+
+
+
+
+
+
 

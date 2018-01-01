@@ -62,11 +62,13 @@ I read all three of these files into a single data frame, then used the quanteda
 
 ## Frequency Analysis
 
-``` {r, echo=F}
+``` {r, echo=F, include=F}
 
 load(file="tbl1.Rda")
 load(file="tbl2.Rda")
 load(file="tbl3.Rda")
+
+library(dplyr)
 
 # define intercepts where we reach 50 and 90 percent of total n-grams
 
@@ -103,5 +105,36 @@ The plot below shows the top 20 unigrams:
 
 ![](Columns1.png)
 
-This next plot shows what percentage of unique unigrams I need to cover 50 and 90 percent of the total unigrams in the sample.  We can see that we only need a small 
+
+This next plot shows what percentage of unique unigrams I need to cover 50 and 90 percent of the total unigrams in the sample.  We can see that we only need `r yint1a*100`% of the unique unigrams to cover 50$ of the language and only `r yint1b*100`% to cover 90%.
+
+![](plot1.png)
+
+## Bi-grams
+
+The plot below shows the top 20 bigrams:
+
+![](Columns2.png)
+
+Now we will plot what percentage of unique bigrams I need to cover 50 and 90 percent of the total bigrams in the sample.  With bigrams we need `r yint2a*100`% of the unique bigrams to cover 50% of the language and `r yint2b*100`% to cover 90%.
+
+![](plot2.png)
+
+## Trigrams
+
+This plot shows the top 20 trigrams:
+
+![](Columns3.png)
+
+With trigrams, we see that there is a much higher percentage of low frequency occurances.  It takes `r yint3a*100`% of the unique trigrams to cover 50% of the total and `r yint3b*100`% of the uniques to cover 90%.  
+
+![](plot3.png)
+
+
+
+
+
+
+
+
 
