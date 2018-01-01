@@ -8,6 +8,18 @@ sizeme<-function(x) {
 
 # libraries
 
+if("dplyr" %in% rownames(installed.packages()) == FALSE)
+{install.packages("dplyr")}
+
+if("quanteda" %in% rownames(installed.packages()) == FALSE)
+{install.packages("quanteda")}
+
+if("ngram" %in% rownames(installed.packages()) == FALSE)
+{install.packages("ngram")}
+
+if("ggplot2" %in% rownames(installed.packages()) == FALSE)
+{install.packages("ggplot2")}
+
 library(quanteda)
 library(ngram)
 library(dplyr)
@@ -83,9 +95,13 @@ docvars(TxtCorpAll, "Source")<-AllText$Source
 
 corpdocs<-ndoc(TxtCorpAll)
 
+save(corpdocs, file="corpdocs.Rda")
+
 # store a count of total features (unique words) in big corpus
 
 corpfeatures<-nfeature(dfm(TxtCorpAll))
+
+save(corpfeatures, file="corpfeatures.Rda")
 
 # remove the big data frame from memory
 
@@ -171,6 +187,10 @@ tbl3$pctdoc<-tbl3$ndx/max(as.numeric(tbl3$ndx))
 rm(Mydfm1, Mydfm2, Mydfm3, TxtCorp)
 
 gc(T)
+
+save(tbl1, file="tbl1.Rda")
+save(tbl2, file="tbl2.Rda")
+save(tbl3, file="tbl3.Rda")
 
 # Make some plots
 
