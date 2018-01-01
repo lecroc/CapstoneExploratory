@@ -110,7 +110,7 @@ This next plot shows what percentage of unique unigrams I need to cover 50 and 9
 
 ![](plot1.png)
 
-## Bi-grams
+### Bi-grams
 
 The plot below shows the top 20 bigrams:
 
@@ -120,7 +120,7 @@ Now we will plot what percentage of unique bigrams I need to cover 50 and 90 per
 
 ![](plot2.png)
 
-## Trigrams
+### Trigrams
 
 This plot shows the top 20 trigrams:
 
@@ -130,9 +130,31 @@ With trigrams, we see that there is a much higher percentage of low frequency oc
 
 ![](plot3.png)
 
+## Next Steps
 
+To me, the object of this project is to provide a utility that will aid the user by filling in the most common parts of the language as they are typing on their mobile device.  This means that the app should be as proficient as possible at providing support for common phrases and not worrry too much about those less frequently used.  It seems that as n gets larger the coverage of the most frequent n-grams gets smaller.  I plan to explore the appropriate frequency cut-offs for 3, 4, and 5 grams to get the most common phrases predicted accurately.
 
+### Model and Application Development
 
+As I move forward with developing a text prediciton model, I will be exploring the following areas further:
+
+#### Stop Words
+So far, I have left the stop words in the corpus as I think they need to be included for accurate prediction.
+
+#### n-grams
+I will be exploring adding 4, 5, and 6 grams into the model
+
+#### Coverage
+To manage the size of the data behind the algorithm, I will look at how many of the infrequent n-grams I can drop from the data set.  I plan treat these improbable n-grams with the same smoothing procedure I'll use to account for terms not in the corpus.
+
+#### Source data
+It seems that the blog data is the most conversational of all the data sets.  It might make sense to oversample or only use this data set vs. the news and twitter data.
+
+#### Shiny App
+I am not an HTML expert.  I plan to adapt the shiny app that I created for the data products course for this project.  My main focus will be on making the model as accurate and efficient as possible.  If I have extra time after that is accomplished, I'll spend some time trying to make it look pretty as well.
+
+#### Code
+All of the code to perform my analysis and generate this document can be found at [this](https://github.com/lecroc/CapstoneExploratory) github repo.
 
 
 
